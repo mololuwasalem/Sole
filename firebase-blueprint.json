@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Basic user profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "createdAt"]
+    },
+    "Bank": {
+      "title": "Bank Account",
+      "description": "User's bank account information",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["checking", "savings", "credit", "other"] },
+        "balance": { "type": "number" },
+        "currency": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "type", "balance", "currency", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Income or expense record",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "bankId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["income", "expense"] },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "bankId", "amount", "type", "category", "date", "createdAt"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "Monthly or periodic budget for a category",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "category": { "type": "string" },
+        "limit": { "type": "number" },
+        "period": { "type": "string", "enum": ["monthly", "weekly", "yearly"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "category", "limit", "period", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Main user collection"
+    },
+    "banks/{bankId}": {
+      "schema": "Bank",
+      "description": "User bank accounts"
+    },
+    "transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User transactions"
+    },
+    "budgets/{budgetId}": {
+      "schema": "Budget",
+      "description": "User budgets"
+    }
+  }
+}

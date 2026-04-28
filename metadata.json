@@ -1,0 +1,6 @@
+{
+  "name": "Sole",
+  "description": "Secure, AI-powered personal finance tracker for managing expenses, income, and bank accounts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["Finance Management", "AI Categorization", "Real-time Sync"]
+}
